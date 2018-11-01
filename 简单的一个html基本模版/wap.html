@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- 360浏览器渲染极速模式 -->
+  <meta name="renderer" content="webkit">
+  <!-- 优先使用 IE 最新版本和 Chrome -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <!-- 移动端页面设置视口宽度等于设备宽度，并禁止缩放。  iphoneX页面内容充满屏幕 viewport-fit=cover -->
+  <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover" /> -->
+  <!-- 使用了flexible不设置dpr -->
+  <meta name="viewport" content="user-scalable=no,viewport-fit=cover" />
+  <!-- 禁止将页面中的数字识别为电话号码 -->
+  <meta name="format-detection" content="telephone=no" />
+  <title>Document</title>
+  <!-- 定义网页作者author -->
+  <meta name="author" content="author,email address">
+  <!-- 页面关键词keywords -->
+  <meta name="keywords" content="your keywords">
+  <!-- 页面描述内容description -->
+  <meta name="description" content="your description">
+  <!-- 网站图标 -->
+  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="Shortcut Icon" href="favicon.png" type="image/x-icon">
+  <!-- Normalize.css使浏览器更加一致地呈现所有元素并符合现代标准。它只针对需要规范化的样式 -->
+  <link rel="stylesheet" href="./css/normalize.css">
+  <!-- 公共及功能样式 -->
+  <link rel="stylesheet" href="./css/base.css">
+  <script src="./js/flexible.js"></script>
+</head>
+<body>
+  <div style="font-size:36px;"> sdsd</div>
+
+  <!-- vue的cdn地址 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <!-- jquery的cdn地址 -->
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  
+  <!-- 消除300ms的延迟 主要是为了ios，标签已经禁用缩放，可不用改功能 -->
+  <script src="./js/fastclick.js"></script>
+  <script>
+    if ('addEventListener' in document) {
+      document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body);
+      }, false);
+    }
+  </script>
+</body>
+</html>
