@@ -5,6 +5,7 @@
   // adjust body font size
   function setBodyFontSize () {
     if (document.body) {
+      docEl.setAttribute("data-dpr", dpr)
       document.body.style.fontSize = (12 * dpr) + 'px'
     }
     else {

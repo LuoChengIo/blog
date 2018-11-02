@@ -1,0 +1,29 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "这是一些前端资源整合",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuoChengIo/blog.git"
+  },
+  "author": "lc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LuoChengIo/blog/issues"
+  },
+  "homepage": "https://github.com/LuoChengIo/blog#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-postcss": "^6.1.1",
+    "gulp-px3rem": "^0.3.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp.spritesmith": "^6.9.0",
+    "node-sass": "^4.9.4"
+  }
+}
