@@ -1,0 +1,21 @@
+.test {
+  width: 10rem;
+  color: #E6A23C;
+  height: 0.85333rem;
+  -webkit-transform: translateX(-12PX);
+      -ms-transform: translateX(-12PX);
+          transform: translateX(-12PX);
+  line-height: 0.53333rem;
+  border: 0.01333rem solid #ddd;
+  /* 设置字体*/
+  font-size: 24px;
+}
+  .test .ts{
+    color: red;
+  }
+  [data-dpr="2"] .test {
+      font-size: 48px;
+  }
+  [data-dpr="3"] .test {
+      font-size: 72px;
+  }

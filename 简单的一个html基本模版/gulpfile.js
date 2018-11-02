@@ -1,27 +1,44 @@
 
 var gulp = require('gulp');
 var rename = require('gulp-rename');//文件重命名
-var px2rem = require('gulp-px3rem');
-var sass = require('gulp-sass');
-var autoprefixer = require('gulp-autoprefixer');
 var spritesmith=require('gulp.spritesmith');
 
-gulp.task('sass', function () {
-  return gulp.src('./styles/*.scss')
-		.pipe(px2rem(
-			{
-				baseDpr: 2,             // base device pixel ratio (default: 2)
-				threeVersion: false,    // whether to generate @1x, @2x and @3x version (default: false)
-				remVersion: false,       // whether to generate rem version (default: true)
-				remUnit: 75,            // rem unit value (default: 75)
-				remPrecision: 6         // rem precision (default: 6)
-			}
-		))
-		// .pipe(px2rem())
-		.pipe(autoprefixer())
-		.pipe(sass({outputStyle: 'expanded'}))
-		// .pipe(sass({outputStyle: 'compressed'}))
-		// .pipe(rename({extname: ".css"}))
+var postcss = require('gulp-postcss');
+var autoprefixer = require('autoprefixer');
+var pxtorem = require('postcss-pxtorem');
+var postcssSass = require("postcss-sass");
+var atImport = require("postcss-import");
+var simpleVars=require('postcss-simple-vars');
+var mixins=require('postcss-mixins');
+var extend=require('postcss-simple-extend');
+var nested=require('postcss-nested');
+var calc = require("postcss-calc")
+var precss=require('precss')
+
+gulp.task('postcss', function () {
+	var plugins = [
+		atImport(),
+		mixins(),
+		simpleVars(),
+		calc(),
+		extend(),
+		nested(),
+		precss(),
+		pxtorem({
+			rootValue: 75,
+			unitPrecision: 5,
+			propList: ['*', '!font*'],
+			selectorBlackList: [],
+			replace: true,
+			mediaQuery: false,
+			minPixelValue: 0		
+		}),
+		autoprefixer({browsers: ["iOS >= 7","Android >= 4",'last 4 versions']})
+		
+    ];
+  return gulp.src('./styles/*.postcss')
+  		.pipe(postcss(plugins))
+		.pipe(rename({extname: ".css"}))
     .pipe(gulp.dest('./css'));
 });
 gulp.task('sprite', function () {
@@ -41,8 +58,8 @@ gulp.task('copy',function(){ // 复制css文件
 	.pipe(gulp.dest('./css/fonts'));
 });
 gulp.task('watch',function(){
-	// 监听sass是否变动
-	gulp.watch('./styles/**/*.scss',['sass']);
+	// 监听postcss是否变动
+	gulp.watch('./styles/**/*.postcss',['postcss']);
 	// 监听原生css是否变动，重新复制到对应目录
 	gulp.watch('./styles/**/*.css',['copy']);
 })
