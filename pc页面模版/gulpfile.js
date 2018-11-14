@@ -115,11 +115,18 @@ gulp.task('images', function () {
 });
 // 文件合并
 gulp.task('concat', function () {
-  return gulp.src(srcPath.script + '/concat/*.min.js') // 要合并的文件
+  return gulp.src(srcPath.script + '/concat/*.js') // 要合并的文件
     .pipe(concat('libs.js')) // 合并成libs.js
     .pipe(rename({
       suffix: '.min'
     })) // 重命名
+    .pipe(uglify({
+      warnings: 'verbose',
+      mangle: true, //类型：Boolean 默认：true 是否修改变量名
+      toplevel: false, //（默认false） - true如果要启用顶级变量和函数名称修改并删除未使用的变量和函数，。
+      keep_fnames: false // (默认值:) false- 传递true以防止丢弃或损坏函数名称。对于依赖的代码很有用
+    })) // 使用uglify进行压缩，并保留部分注释
+    .pipe(sourcemaps.write('maps')) // 地图输出路径（存放位置）
     .pipe(gulp.dest(destPath.script)); // 输出路径
 });
 
