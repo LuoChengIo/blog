@@ -1,16 +1,17 @@
 
 @import './lib/variables.css';
 @import './lib/mixin.css';
-
+@import './lib/normalize.css';
+@import './lib/base.css';
 .test {
   width: 750px;
   color: $warning;
   height: 64px;
+  font-size:38px;
   transform: translateX(-12PX);
   line-height: 40px;
   border: 1px solid #ddd;
   .ts{
     color: gray;
   }
-  @mixin font-dpr 24px;
 }

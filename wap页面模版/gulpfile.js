@@ -17,6 +17,7 @@ var uglify = require('gulp-uglify'), // JS文件压缩
   spritesmith = require('gulp.spritesmith'); //图片合并
 postcss = require('gulp-postcss'); //postcss
 autoprefixer = require('autoprefixer'); // css3样式兼容
+var pxtorem = require('postcss-pxtorem'); // px转rem
 atImport = require("postcss-import"); // import引入
 simpleVars = require('postcss-simple-vars'); // 变量支撑$
 mixins = require('postcss-mixins'); // minins
@@ -25,6 +26,7 @@ nested = require('postcss-nested'); // nested
 calc = require("postcss-calc") // calc 计算
 cssmin = require("postcss-clean") // 样式压缩
 precss = require('precss') // 
+
 
 /* = 全局设置
 -------------------------------------------------------------- */
@@ -59,6 +61,15 @@ gulp.task('postcss', function () { // 样式处理
     extend(),
     nested(),
     precss(),
+    pxtorem({
+			rootValue: 75,
+			unitPrecision: 5,
+			propList: ['*'],
+			selectorBlackList: [],
+			replace: true,
+			mediaQuery: false,
+			minPixelValue: 0		
+		}),
     autoprefixer({
       browsers: ["iOS >= 7", "Android >= 4", 'last 4 versions']
     }),
@@ -148,6 +159,8 @@ gulp.task('watch', function () {
   gulp.watch(srcPath.image + '/**/*', ['images']);
   // 监听 js
   gulp.watch([srcPath.script + '/*.js', '!' + srcPath.script + '/*.min.js'], ['script']);
+  //监听插件
+  gulp.watch([srcPath.script + '/lib/*.js', srcPath.fonts + '/*'], ['copy']);
 });
 // 默认任务
 gulp.task('default', ['copy','webserver', 'watch']);

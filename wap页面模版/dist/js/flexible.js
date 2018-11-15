@@ -13,12 +13,21 @@
   }
   setBodyFontSize();
   // set 1rem = viewWidth / 10
+  // function setRemUnit () {
+  //   var rem = docEl.clientWidth / 10
+  //   docEl.setAttribute("data-dpr", dpr)
+  //   docEl.style.fontSize = rem + 'px'
+  // }
   function setRemUnit () {
-    var rem = docEl.clientWidth / 10
+    var maxwidth = 750
+    var cwidth = docEl.clientWidth
+    if(cwidth>maxwidth) {
+      cwidth = maxwidth
+    }
+    var rem = cwidth / 10
     docEl.setAttribute("data-dpr", dpr)
     docEl.style.fontSize = rem + 'px'
   }
-
   setRemUnit()
 
   // reset rem unit on page resize
